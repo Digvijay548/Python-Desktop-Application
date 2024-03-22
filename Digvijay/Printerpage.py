@@ -12,29 +12,29 @@ class SecondPage(tk.CTkFrame):
     def __init__(self, master,heights,widths):     
         tk.CTkFrame.__init__(self, master,heights,widths)
         self.master=master
-        self.mainscrenn=tk.CTkFrame(self,fg_color="#E0E0E0",width=widths,height=heights)
+        self.mainscrenn=tk.CTkFrame(self,fg_color="#003060",width=widths,height=heights)
         self.mainscrenn.pack()  
-        self.centerframe=tk.CTkFrame(self.mainscrenn, fg_color="white", height=400, width=600, corner_radius=10,border_width=2,border_color="#424242" )
+        self.centerframe=tk.CTkFrame(self.mainscrenn, fg_color="#68BBE3", height=400, width=600,border_width=2,border_color="#424242" )
         self.centerframe.place(relx=0.2,rely=0.2)
         # Create labels
         
-        self.headinglabel = tk.CTkLabel(self.centerframe, text="Printer Settings",text_color="#212121",height=20,width=80,font=("Arial", 16))
-        self.label1 = tk.CTkLabel(self.centerframe, text="Enter Printer ip address",text_color="#212121",height=20,width=80)
-        self.label2 = tk.CTkLabel(self.centerframe, text="enter Printer UsbPort",text_color="#212121",height=20,width=80)
-        self.label3 =tk.CTkLabel(self.centerframe, text="Enter data to print",text_color="#212121",height=20,width=80)
-        self.result_label = tk.CTkLabel(self.centerframe,text_color="#212121",height=20,width=80)
+        self.headinglabel = tk.CTkLabel(self.centerframe, text="Printer Settings",text_color="white",height=20,width=80,font=("Arial", 16))
+        self.label1 = tk.CTkLabel(self.centerframe, text="Enter Printer ip address",text_color="white",height=20,width=80)
+        self.label2 = tk.CTkLabel(self.centerframe, text="enter Printer UsbPort",text_color="white",height=20,width=80)
+        self.label3 =tk.CTkLabel(self.centerframe, text="Enter data to print",text_color="white",height=20,width=80)
+        self.result_label = tk.CTkLabel(self.centerframe,text_color="white",height=20,width=80)
 
         # Create entry widgets
-        self.entryIp = tk.CTkEntry(self.centerframe, corner_radius=15,width=150,height=30,placeholder_text="Enter Ip",border_width=0,fg_color="#C6C6C6",placeholder_text_color="#4C4C4C",bg_color="white", font=("yu gothic ui semibold", 12))
-        self.entryPort = tk.CTkEntry(self.centerframe, corner_radius=15,width=150,height=30,placeholder_text="Enter Port like 9100",border_width=0,fg_color="#C6C6C6",placeholder_text_color="#4C4C4C",bg_color="white", font=("yu gothic ui semibold", 12))
-        self.entryData = tk.CTkEntry(self.centerframe, corner_radius=15,width=150,height=30,placeholder_text="Enter Data to print",border_width=0,fg_color="#C6C6C6",placeholder_text_color="#4C4C4C",bg_color="white", font=("yu gothic ui semibold", 12))
+        self.entryIp = tk.CTkEntry(self.centerframe, corner_radius=15,width=150,height=30,placeholder_text="Enter Ip",border_width=0,fg_color="white",placeholder_text_color="#4C4C4C",bg_color="#68BBE3", font=("yu gothic ui semibold", 12))
+        self.entryPort = tk.CTkEntry(self.centerframe, corner_radius=15,width=150,height=30,placeholder_text="Enter Port like 9100",border_width=0,fg_color="white",placeholder_text_color="#4C4C4C",bg_color="#68BBE3", font=("yu gothic ui semibold", 12))
+        self.entryData = tk.CTkEntry(self.centerframe, corner_radius=15,width=150,height=30,placeholder_text="Enter Data to print",border_width=0,fg_color="white",placeholder_text_color="#4C4C4C",bg_color="#68BBE3", font=("yu gothic ui semibold", 12))
 
         # Create buttons
         self.button1 = tk.CTkButton(self.centerframe, text="Connect", command=self.button1_clicked, corner_radius=20, fg_color="#FF9800",width=120,height=30,hover_color="#ae6800")
         self.button2 = tk.CTkButton(self.centerframe, text="Send Data", command=self.button2_clicked, corner_radius=20, fg_color="#FF9800",width=120,height=30,hover_color="#ae6800")
 
         # Grid layout manager to arrange widgets within the label frame
-        self.headinglabel.place(y=20,x=200)
+        self.headinglabel.place(y=20,x=220)
         self.label1.place(y=70,x=110)    
         self.label2.place(y=140,x=110)
         self.label3.place(y=210,x=110)
