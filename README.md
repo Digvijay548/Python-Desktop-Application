@@ -40,8 +40,12 @@ Introduction to this project
 
 6) **Event dll** → which is getting c# events and getting to python code which makes responsive gui
 
-7) **pylibdmtx** → **this is This main module which is responsible for decoding database or other 2Dbarcode code decoding**
+7) **pylibdmtx** → **this is for decoding datamatrix or other 2Dbarcode code decoding**
 
+8)  **zxingcpp** → **this is This main module which is responsible for decoding datamatrix or other 2Dbarcode code decoding faster than any othe module**
+
+
+Note:- install all packdges which is in camerapage.py file. this is IMP
 
 
 
