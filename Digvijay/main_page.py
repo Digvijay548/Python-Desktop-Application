@@ -2,6 +2,7 @@ import customtkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
 from CTkMessagebox import CTkMessagebox
+from custom_hovertip import CustomTooltipLabel
 
 class MainPage(tk.CTkFrame):
     def __init__(self, master, height, width, show_stackpanel_page_callback):
@@ -12,34 +13,39 @@ class MainPage(tk.CTkFrame):
 
         # Define light and dark colors
         light_gray = "#F5F5F5"   # Light gray for mainframe
-        dark_gray = "#424242"    # Dark gray for subframe
-        white = "#FFFFFF"        # White for text and buttons
+        self.dark_gray = "#0b2545"    # Dark gray for subframe
+        white = "#FFFFFF" 
+        self.btncolor="#637081"   
+        self.textcolor="#0b2545"
+        self.lightgray="#8da9c4"   
+        self.bthover="#accbe1"
 
-        self.mainframe = tk.CTkFrame(self, fg_color="#D6D6D6", height=height, width=width)
+        self.mainframe = tk.CTkFrame(self, fg_color=self.lightgray, height=height, width=width)
         self.mainframe.place(relx=0.5, rely=0.5, anchor="center")
         
         img1=ImageTk.PhotoImage(Image.open("./img/pattern.png"))
         self.l1=tk.CTkLabel(self.mainframe,image=img1)
         self.l1.place(relwidth=1.0,relheight=1.0)
 
-        self.subframe = tk.CTkFrame(self.l1, height=450, width=900,fg_color="#055C9D",bg_color="#055C9D")
+        self.subframe = tk.CTkFrame(self.l1, height=450, width=900,fg_color=self.lightgray ,bg_color=self.lightgray )
         self.subframe.place(relx=0.5, rely=0.5, anchor="center")
 
 
-        img2=ImageTk.PhotoImage(Image.open("./img/loginlogob.png").resize([400,150])) # verishield logo
-        self.l2=tk.CTkLabel(self.subframe,image=img2,width=50,text="",bg_color="#68BBE3",fg_color="#68BBE3")
+       # img2=ImageTk.PhotoImage(Image.open("./img/loginlogob.png").resize([400,150])) # verishield logo
+        img2=ImageTk.PhotoImage(Image.open("./images/vector.png")) # vectpr login logo
+        self.l2=tk.CTkLabel(self.subframe,image=img2,width=50,text="",bg_color=self.lightgray ,fg_color=self.lightgray )
         self.l2.place(relheight=1.0,x=0,y=0)
 
 
 
         # Create labels
-        self.headinglabel = tk.CTkLabel(self.subframe, text="Login Screen", text_color="white", height=20, width=80, font=("yu gothic ui semibold", 20),)
-        self.label1 = tk.CTkLabel(self.subframe, text="Enter Username", text_color=dark_gray, height=20, width=80)
-        self.label2 = tk.CTkLabel(self.subframe, text="Enter Password", text_color=dark_gray, height=20, width=80)
+        self.headinglabel = tk.CTkLabel(self.subframe, text="Login Screen", text_color=self.textcolor, height=20, width=80, font=("yu gothic ui semibold", 20),)
+        self.label1 = tk.CTkLabel(self.subframe, text="Enter Username", text_color=self.textcolor , height=20, width=80)
+        self.label2 = tk.CTkLabel(self.subframe, text="Enter Password", text_color=self.textcolor , height=20, width=80)
 
         # Create entry widgets
-        self.entryusername = tk.CTkEntry(self.subframe, corner_radius=13, width=280, height=30, placeholder_text="Enter Username",border_width=0,fg_color="white",placeholder_text_color="#4C4C4C",bg_color="#055C9D", font=("yu gothic ui semibold", 12))
-        self.entrypassword = tk.CTkEntry(self.subframe, corner_radius=13, width=280, height=30, placeholder_text="Enter Password",show="*",border_width=0,fg_color="white",placeholder_text_color="#4C4C4C",bg_color="#055C9D", font=("yu gothic ui semibold", 12))
+        self.entryusername = tk.CTkEntry(self.subframe, corner_radius=13, width=280, height=30, placeholder_text="Enter Username",border_width=0,fg_color="white",placeholder_text_color=self.textcolor,bg_color=self.lightgray , font=("yu gothic ui semibold", 12))
+        self.entrypassword = tk.CTkEntry(self.subframe, corner_radius=13, width=280, height=30, placeholder_text="Enter Password",show="*",border_width=0,fg_color="white",placeholder_text_color=self.textcolor,bg_color=self.lightgray , font=("yu gothic ui semibold", 12))
         
         self.imgshow=ImageTk.PhotoImage(Image.open("./images/showp.png").resize([18,15]))
         
@@ -49,9 +55,10 @@ class MainPage(tk.CTkFrame):
         
 
         # Create buttons
-        self.Loginbtn = tk.CTkButton(self.subframe, text="Login", command=self.onlogin, corner_radius=20, fg_color="#FF9800", width=120, height=30, font=("yu gothic ui semibold", 12),hover_color="#ae6800")
-        self.Forgetbtn = tk.CTkButton(self.subframe, text="Forget Password", corner_radius=20, fg_color="#FF9800", width=120, height=30, font=("yu gothic ui semibold", 12),hover_color="#ae6800")
-
+        self.Loginbtn = tk.CTkButton(self.subframe, text="Login", command=self.onlogin, corner_radius=20, fg_color= self.btncolor, width=120, height=30, font=("yu gothic ui semibold", 12),hover_color=self.bthover,text_color=self.textcolor)
+        CustomTooltipLabel(anchor_widget=self.Loginbtn, text="Before login please verify username and password.", background="grey",foreground="black", width=80, justify=tk.CENTER)
+        self.Forgetbtn = tk.CTkButton(self.subframe, text="Forget Password", corner_radius=20, fg_color= self.btncolor, width=120, height=30, font=("yu gothic ui semibold", 12),hover_color=self.bthover,text_color=self.textcolor)
+        CustomTooltipLabel(anchor_widget=self.Forgetbtn, text="Forget password will redirect you to another page.", background="grey",foreground="black", width=80, justify=tk.CENTER)
         # Arrange labels and entries
         self.headinglabel.place(y=30, x=500)
         #self.label1.place(y=115, x=410)

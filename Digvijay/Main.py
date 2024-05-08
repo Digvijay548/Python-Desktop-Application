@@ -17,6 +17,10 @@ class LoadingWindow(tk.CTk):
         
         self.geometry("450x300")
         self.overrideredirect(True)
+        dark_gray = "#0b2545" 
+        self.lightgray="#8da9c4"
+        self.btncolor="#637081"
+        self.bthover="#accbe1"
 
         # Get the screen width and height
         screen_width = self.winfo_screenwidth()
@@ -156,9 +160,6 @@ class SampleApp(tk.CTk):
 
         self.body=tk.CTkFrame(self,height=screen_height-100,width=screen_width,bg_color="#372b47",fg_color="#372b47")
         self.body.place(y=50,x=0)
-
-        self.stackpanel_page = Stackpanelpage(master=self.body,height=self.body._current_height, width=self.body._current_width, show_main_page_callback=self.show_main_page)
-        
         self.update_time()
         self.show_main_page()
 
@@ -177,7 +178,7 @@ class SampleApp(tk.CTk):
     def shutdown(self):
         print("Shutdown initiated")
          # get yes/no answers
-        msg = CTkMessagebox(self,title="Exit?", message="Do you want to Shutdown the program?",
+        msg = CTkMessagebox(master=self.master,title="Exit?", message="Do you want to Shutdown the program?",
                             icon="warning", option_1="Cancel", option_2="No", option_3="Yes")
         response = msg.get()
         print(response)
@@ -202,8 +203,6 @@ class SampleApp(tk.CTk):
     def show_main_page(self):
         self. main_page = MainPage(master=self.body, height=self.body._current_height+2, width=self.body._current_width, show_stackpanel_page_callback=self.show_stackpanel_page)
         self.main_page.place(x=0,y=0)
-        if(self.stackpanel_page.winfo_ismapped):
-         self.stackpanel_page.place_forget()
 
     def show_stackpanel_page(self):
         if(self.main_page.winfo_ismapped):

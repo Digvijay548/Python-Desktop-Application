@@ -1,9 +1,10 @@
 import customtkinter as tk
 from tkinter import ttk
 import clr
-clr.AddReference('D:\\OneDrive - ACG Associated Capsules Pvt. Ltd\\Desktop\\python poc\\Digvijay\\Dll\\Events.dll')  # Load the C# DLL
+clr.AddReference('D:\python poc\Dll\Events.dll' )  # Load the C# DLL
 from Events import SerialPortManager
 from CTkTable import *
+from custom_hovertip import CustomTooltipLabel
     
     
 
@@ -15,6 +16,10 @@ class FirstPage(tk.CTkFrame):
        
     def __init__(self, master,heights,widths):     
         tk.CTkFrame.__init__(self, master,heights,widths)
+        self.dark_gray = "#0b2545" 
+        self.btncolor="#637081"
+        self.lightgray="#8da9c4"  
+        self.bthover="#accbe1"
         try :
            self.serial_port_manager = SerialPortManager()
            resultport=self.serial_port_manager.ClosePort()          
@@ -28,12 +33,12 @@ class FirstPage(tk.CTkFrame):
         except Exception as e:
            print("exception in constructor") 
         self.master=master
-        self.mainscrenn=tk.CTkFrame(self,fg_color="#003060",width=widths,height=heights)
+        self.mainscrenn=tk.CTkFrame(self,fg_color=self.dark_gray,width=widths,height=heights)
         self.mainscrenn.pack()    
 
       # ******************************** Centerframe in scanner page ***********************************     
 
-        self.centerframe=tk.CTkFrame(self.mainscrenn,fg_color="#68BBE3", height=400, width=600,border_width=2,border_color="#424242"  )
+        self.centerframe=tk.CTkFrame(self.mainscrenn,fg_color=self.lightgray , height=400, width=600,border_width=2,border_color="#1c1c1c"  )
         self.centerframe.place(relx=0.2,y=70)
         self.result_label = tk.CTkLabel(self.centerframe,text="", text_color="white",height=20,width=300)        
         self.headinglabel = tk.CTkLabel(self.centerframe, text="Scanner Settings",text_color="white",height=20,width=80,font=("Arial", 16))
@@ -42,21 +47,23 @@ class FirstPage(tk.CTkFrame):
         self.board_options = ['COM1', 'COM2', 'COM3','COM4']
         self.selected_board = tk.StringVar()
         self.selected_board.set(self.board_options[0])
-        self.entryPort = tk.CTkComboBox(self.centerframe, corner_radius=15,values=self.board_options,width=150,height=30,border_width=0,fg_color="white",bg_color="#68BBE3", font=("yu gothic ui semibold", 12))
+        self.entryPort = tk.CTkComboBox(self.centerframe, corner_radius=15,values=self.board_options,width=150,height=30,border_width=0,fg_color="white",bg_color=self.lightgray , font=("yu gothic ui semibold", 12))
         port_value = None
         if "port" in stored_valuesScanner:
            port_value = stored_valuesScanner.get("port")
         if port_value in self.board_options:
           self.entryPort.set(port_value)
         # self.entryBaord['values'] = self.board_options
-        self.entryBaord = tk.CTkEntry(self.centerframe, corner_radius=15,width=150,height=30,placeholder_text="Enter boudrate",border_width=0,fg_color="white",placeholder_text_color="#4C4C4C",bg_color="#68BBE3", font=("yu gothic ui semibold", 12))
+        self.entryBaord = tk.CTkEntry(self.centerframe, corner_radius=15,width=150,height=30,placeholder_text="Enter boudrate",border_width=0,fg_color="white",placeholder_text_color="#4C4C4C",bg_color=self.lightgray , font=("yu gothic ui semibold", 12))
         board_rate_value = None
         if "board_rate" in stored_valuesScanner:
            board_rate_value = stored_valuesScanner["board_rate"]
            self.entryBaord.insert(0,board_rate_value)
         # Create buttons
-        self.button1 = tk.CTkButton(self.centerframe, text="Connect", command=self.button1_clicked, corner_radius=20, fg_color="#FF9800",width=120,height=30,text_color="white",hover_color="#ae6800")
-        self.button2 = tk.CTkButton(self.centerframe, text="Disconnect", command=self.button2_clicked, corner_radius=20,fg_color="#FF9800",width=120,height=30,text_color="white",hover_color="#ae6800")
+        self.button1 = tk.CTkButton(self.centerframe, text="Connect", command=self.button1_clicked, corner_radius=20, fg_color= self.btncolor,width=120,height=30,text_color="white",hover_color=self.bthover)
+        CustomTooltipLabel(anchor_widget=self.button1, text="Connect to scanner..", background="white",foreground="black", width=20, justify=tk.LEFT)
+        self.button2 = tk.CTkButton(self.centerframe, text="Disconnect", command=self.button2_clicked, corner_radius=20,fg_color= self.btncolor,width=120,height=30,text_color="white",hover_color=self.bthover)
+        CustomTooltipLabel(anchor_widget=self.button1, text="If you are connected to scanner then only try", background="white",foreground="black", width=40, justify=tk.LEFT)
         # Arrange labels and entries
         self.headinglabel.place(y=20,x=220)
         #self.label1.place(y=70,x=110) comment out for reson ip not required in scanner
@@ -69,11 +76,11 @@ class FirstPage(tk.CTkFrame):
         self.button2.place(y=280,x=310) 
 
       # ******************************** Bottom frame in scanner page ***********************************    
-        self.Bottomframe=tk.CTkFrame(self.mainscrenn,fg_color="#68BBE3", height=200, width=800,border_width=2,border_color="#424242"  )
+        self.Bottomframe=tk.CTkFrame(self.mainscrenn,fg_color=self.dark_gray , height=200, width=800)
         self.Bottomframe.place(x=280,y=500)
         self.value = [["Index","Scanner Boardrate","Scanner Port"],         [1,"9100","COM4"],         [3,"9100","COM4"],      ]
 
-        self.table = CTkTable(self.Bottomframe, row=3, column=3, values=self.value,header_color="Gray",width=200,command=self.selectedtabeldata)
+        self.table = CTkTable(self.Bottomframe, row=3, column=3,hover_color=self.btncolor, values=self.value,header_color=self.btncolor,width=200,command=self.selectedtabeldata,colors=[self.bthover,self.bthover])
         self.table.pack(expand=True, fill="both", padx=20, pady=20)
 
 

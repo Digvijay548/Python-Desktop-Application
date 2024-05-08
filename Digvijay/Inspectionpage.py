@@ -12,9 +12,11 @@ class Inspection(tk.CTkFrame):
     def __init__(self, master,heights,widths):     
         tk.CTkFrame.__init__(self, master,heights,widths)
         self.master=master
-        self.mainscrenn=tk.CTkFrame(self,fg_color="#003060",width=widths,height=heights)
+        self.dark_gray = "#0b2545" 
+        self.lightgray="#8da9c4" 
+        self.mainscrenn=tk.CTkFrame(self,fg_color=self.lightgray,width=widths,height=heights)
         self.mainscrenn.pack()  
-        self.centerframe=tk.CTkFrame(self.mainscrenn, fg_color="#68BBE3", height=400, width=600,border_width=2,border_color="#424242" )
+        self.centerframe=tk.CTkFrame(self.mainscrenn, fg_color=self.lightgray , height=400, width=600,border_width=2,border_color=self.dark_gray )
         self.centerframe.place(relx=0.2,rely=0.2)
         # Create labels
         
